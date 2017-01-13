@@ -1,0 +1,58 @@
+
+\ifdefined\definecolor
+	 \message{}
+\else
+	\usepackage{color}
+\fi
+
+%% review macros
+\definecolor{orange}{rgb}{1,0.5,0}
+
+% wording{}
+\newcounter{wordingannotations}
+\newcommand{\wording}[1]{\textcolor{orange}{#1}\addtocounter{wordingannotations}{1}}
+
+% todo{}
+\newcounter{todoannotations}
+\newcommand{\todo}[1]{
+%	\ifdefined\marginpar
+%		\marginpar{
+%			\textcolor{red}{#1}
+%		}
+%	\else
+		\textcolor{red}{\textbf{[#1]}}
+%	\fi
+	\addtocounter{todoannotations}{1}
+}
+
+% add statistics after biliography
+%\let{\oldbibliography}{\bibliography}
+%\renewcommand{\bibliography}[1] {
+%	\oldbibliography{#1}
+%	\pagebreak
+%	\section*{Review Statistics}
+%	\begin{description}
+%		\item[todo] \arabic{todoannotations}
+%		\item[wording] \arabic{wordingannotations}
+%	\end{description}
+%}
+
+\ifdefined\final
+	\ifdefined\hypersetup
+		\hypersetup{
+			linkcolor=black,
+			citecolor=black,
+			urlcolor=black
+		}
+	\fi
+	\renewcommand{\wording}[1]{#1}
+	\renewcommand{\todo}[1]{}
+\else
+	\ifdefined\hypersetup
+		\hypersetup{
+			linkcolor=blue,
+			citecolor=blue,
+			urlcolor=blue
+		}
+	\fi
+\fi
