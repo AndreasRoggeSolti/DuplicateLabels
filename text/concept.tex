@@ -1,4 +1,23 @@
-\section{Concept X}
+\section{General Clustering-Based Duplicate Label Induction Method}
 \label{sec:concept}
 
-\lipsum[2]
+Our framework consists of three steps: 
+
+\paragraph{Step 1: Define Window and Clustering Technique}
+\begin{itemize}
+	\item Define Window sizes (1,2,4,8,16)
+	\item Define Window shape (left, right, symmetric, pre-post)
+	\item Define Influences (uniform, linear decrease, exponential decrease)
+	\item Define Clustering method (High-Dimensional clustering with DBSCAN), (Graph Clustering based on Chinese Whispers algorithm~\cite{biemann2006chinese})
+\end{itemize}
+
+\paragraph{Step 2: Apply Clustering}
+Process Log and gather windows per each event. Complexity: Linear in the size of the log.
+Apply selected clustering and split event labels according to their clusters in the candidate log. Complexity: DBSCAN (look up), Chinese Whispers (linear in the size of the graph = log size)
+
+\paragraph{Step 3: Select Best Candidate }
+\begin{itemize}
+	\item Apply fast mining technique and heuristically compute a score based on fitness and precision.
+	\item Rank competing methods by score and pick combination with highest score.
+	\item Return log with highest score.
+\end{itemize}
